@@ -1,39 +1,59 @@
 import React  from "react";
-import {View,Text, TextInput , TouchableOpacity } from "react-native";
+import {
+       View,
+       Text,
+       TextInput ,
+       TouchableOpacity,
+       Vibration,
+       ScrollView
+       } from "react-native";
 import { useState } from "react";
 import ResultImc from "../ResultImc";
 import styles from "./style";
 
 export default function Form(){
 
-    const [height , setHeight] = useState (null)
-    const [weight , setWeight] = useState (null)
-    const [messageImc  , setMessageImc] = useState ("preencha o peso e altura")
-    const [imc , setImc] = useState (null)
-    const [textButton , setTextButton ] = useState ("Calcular")
+    const [height , setHeight] = useState (null);
+    const [weight , setWeight] = useState (null);
+    const [messageImc  , setMessageImc] = useState ("preencha o peso e altura");
+    const [imc , setImc] = useState (null);
+    const [textButton , setTextButton ] = useState ("Calcular");
+    const [errorMessage , setErrorMessage] = useState(null);
+
 
     function imcCalculator(){
         return setImc((weight/(height * height)).toFixed(2))
     }
 
+    function verificationImc(){
+        if(imc == null){
+            // chamando api de vibração do aparelho 
+            Vibration.vibrate();
+            setErrorMessage("Campo obrigatório*");
+        }
+    }
+
     function validationImc(){
         if(weight != null && height != null){
-            imcCalculator()
-            setWeight(null)
-            setHeight(null)
-            setMessageImc("Seu imc é igual:")
-            setTextButton("Calcular Novamente")
+            imcCalculator();
+            setWeight(null);
+            setHeight(null);
+            setMessageImc("Seu imc é igual:");
+            setTextButton("Calcular Novamente");
+            setErrorMessage(null);
             return
         }
-        setImc(null)
-        setTextButton("Calcular")
-        setMessageImc("Preencha o peso e altura")
+        verificationImc();
+        setImc(null);
+        setTextButton("Calcular");
+        setMessageImc("Preencha o peso e altura");
     }
     
     return(
         <View style={styles.formContext}>
-            <View style={styles.form}>
+            <ScrollView style={styles.form}>
                 <Text style={styles.formLabel} >Altura</Text>
+                    <Text style={styles.errorMessage}>{errorMessage}</Text>
                     <TextInput
                     style={styles.input}
                     onChangeText={setHeight} 
@@ -43,6 +63,7 @@ export default function Form(){
                     />
                     
                 <Text style={styles.formLabel}>Peso</Text>
+                   <Text style={styles.errorMessage}>{errorMessage}</Text>
                     <TextInput
                     style={styles.input}
                     onChangeText={setWeight}
@@ -62,7 +83,7 @@ export default function Form(){
                 </TouchableOpacity>
 
              <ResultImc messageResultImc={messageImc} resultImc={imc}/> 
-            </View>
+            </ScrollView>
         </View>
     );
 }

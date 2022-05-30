@@ -5,10 +5,9 @@ const styles = StyleSheet.create({
     formContext: {
         flex: 1 ,
         backgroundColor : "#ffffff",
-        alignItems: "center",
         borderTopLeftRadius : 30 ,
         borderTopRightRadius : 30,  
-        paddingTop: 10,
+        paddingTop: 20,
     },
     form:{
         width:"100%",
@@ -52,10 +51,20 @@ const styles = StyleSheet.create({
         color: "red",
         fontWeight: "bold",
         paddingLeft: 20,
+    },
+
+    exibitionResultImc:{
+        width:"100%",
+        height: "50%",
+    },
+
+    resultImcItem:{
+
+    },
+
+    textResultItemList:{
+
     }
-
-
-    
 
   
 });

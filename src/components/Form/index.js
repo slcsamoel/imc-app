@@ -30,6 +30,7 @@ export default function Form(){
         let totalImc = (weight/(heightFormat * heightFormat)).toFixed(2);
         setImcList((arr)=> [...arr , {id: new Date().getTime(), imc: totalImc}]);
         setImc(totalImc);
+        console.log(imcList);
     }
 
     function verificationImc(){
@@ -107,16 +108,18 @@ export default function Form(){
             } 
 
              <FlatList
+                showsVerticalScrollIndicator={false}
                 style={styles.listImcs}
                 data={imcList.reverse()}
                 renderItem={({item}) =>{
                     return(
                             <Text style={styles.resultImcItem}>
-                                <Text style={styles.textResultItemList}>Resultado IMC =</Text>
+                                <Text style={styles.textResultItemList}>Resultado IMC = </Text>
                                 {item.imc}
                             </Text>
                     )
                 }}
+                keyExtractor={(item) =>{ item.id }}
              >
              </FlatList>   
         </View>

@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius : 30 ,
         borderTopRightRadius : 30,  
         paddingTop: 20,
+        alignItems: 'center',
+        justifyContent:'center',
     },
     form:{
         width:"100%",
@@ -58,12 +60,22 @@ const styles = StyleSheet.create({
         height: "50%",
     },
 
-    resultImcItem:{
+    listImcs:{
+       margin:20,
+    },
 
+    resultImcItem:{
+        fontSize: 26,
+        color: 'red',
+        height: 50,
+        width: '100%',
+        paddingRight: 30,
+        fontWeight: 'bold', 
     },
 
     textResultItemList:{
-
+        fontSize: 16,
+        color: 'green',
     }
 
   
